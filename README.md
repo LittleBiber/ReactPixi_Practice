@@ -1,70 +1,39 @@
-# Getting Started with Create React App
+# 목표
+Step1: 지도 이미지 띄우기
+  - Stripe를 사용
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Step2: 지도 위에 아무 이미지나 띄워
+  - Stripe의 순서를 활용해 구현할 수 있음.
+  - Container에 담아서 한번에 관리할 수도 있을 듯
 
-## Available Scripts
+Step3: 지도를 움직이기
+  - 지도 범위가 끝이 있어야 함 (canvas 밖으로 나가면 안됨)
+  - 지도 이미지 위의 이미지도 따라 움직여야 함.
+  
+  - 1차 시도: 작은 사각 박스를 로컬에서 드래그할 수 있음
+  - 2차 시도: 지도 이미지를 움직일 수 있음
+      문제점: 이동 가능한 최대범위가 정해지지 않아서 지도가 canvas 밖으로 나가면 복구 안됨
 
-In the project directory, you can run:
+Step4: 박스의 클릭영역 할당
+  - Stripe안의 Stripe는 제대로 인식이 안되던데 어떻게 구현해야 할까
+  - 화면상의 클릭이벤트는 window에서 클릭된 좌표를 받아와서 보여줌
+    같은 위치면 canvas에서 움직여도 똑같은 좌표가 나옴.
+  
+  - 해결: Container에 Stripe를 추가하고 
 
-### `npm start`
+Step5: Sector 안에 작은 박스(id값을 할당한 Spot) 생성해 클릭 이벤트 부여하기
+  - 이 부분은 이렇게 구현하는 게 아닌 것 같으니 원본 코드 참고해서 다시 계획 잡기
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 만들어야 하는 것
+  1. 드래그 가능해야 함.
+  2. 이미지가 화면을 벗어나면 안 됨.
+  4. 화면이 확대 가능해야 함. (중요)
 
-### `npm test`
+## 뷰 구성이 어떻게 되어야 할까 (수정 필요)
+  - HTML바닥( 100vw * 100vh ) > 창크기(돋보기 역할)
+  - 모달, Pastures, Search 등등 기능 컴포넌트들 > position: absolute로 고정배치
+  - 지도 외부의 Sprite ? > 일단 지도이미지만으로는 여백이 너무 크기 때문에 말이 안됨.
+  - 지도 이미지 sector_01.png ( 1720px * 1738px ) > 이미지크기(도화지 역할)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 문제: 어떻게 이미지 크기만큼만 이동 가능하게 만들 수 있을까?
